@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: #64C0E8;
+}
+
+#slider {
+	width: 1024px;
+	height: 410px;
+	overflow: hidden;
+	margin: auto;
+}
+
+#slider .slides {
+	display: block;
+	width: 6000px;
+	height: 410px;
+	margin: 0;
+	padding: 0;
+}
+
+#slider .slide {
+	float: left;
+	list-style-type: none;
+	width: 1024px;
+	height: 410px;
+}

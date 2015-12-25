@@ -10,7 +10,14 @@
 
 	
 
-
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"
+		p:username="root"
+		p:password="gEdOrA92"
+		p:driverClassName="com.mysql.jdbc.Driver"
+		p:url="jdbc:mysql://localhost:3306/spring-mini-projekat-1">
+	</bean>
 
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/rent-a-car"
 		expected-type="javax.sql.DataSource">

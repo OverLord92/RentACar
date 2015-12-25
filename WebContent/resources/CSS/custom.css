@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: #64C0E8;
+}
+
+.editCar {
+	display: none;
+}
