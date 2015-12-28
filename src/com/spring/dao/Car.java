@@ -1,11 +1,26 @@
 package com.spring.dao;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Car {
 	
 	private int id;
+	
+	@NotNull(message="ne smije biti null")
+	@Size(min = 15, max = 30, message = "mora biti izmedju 15 i 30")
 	private String manufacturer;
+	
+	@NotNull
+	@Size(min = 5, max = 10, message = "mora biti izmedju 5 i 10")
 	private String model;
+	
+	@NotNull(message="ne smije biti produkcija")
+	@Min(value=100000, message="trololololo")
 	private int yearOfProduction;
+	
+	@NotNull(message="ne smije biti null")
 	private double pricePerDay;
 	
 	

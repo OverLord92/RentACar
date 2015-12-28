@@ -1,17 +1,19 @@
 package com.spring.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,11 @@ import com.spring.dao.CarDAO;
 
 @Controller
 public class CarController {
+	
+	public static final LinkedList<String> manufacturers = 
+			new LinkedList<>(Arrays.asList(new String[]{"Volkswagen", "Opel", "Audi", "Mercedes", "BMW"}));
+	public static final LinkedList<Integer> productionYears = 
+			new LinkedList<>(Arrays.asList(new Integer[]{2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015}));
 	
 	@Autowired
 	private CarDAO carDAO;
@@ -48,17 +55,39 @@ public class CarController {
 	}
 	
 	@RequestMapping(value="/add", method = RequestMethod.GET)
-	public String goTOAddCar(){
+	public String goTOAddCar(Model model){
+		
+		model.addAttribute("car", new Car());
+		model.addAttribute("manufacturers", manufacturers);
+		model.addAttribute("productionYears", productionYears);
 		return "addCar";
 	}
 	
 	@RequestMapping(value="/add", method = RequestMethod.POST)
-	public String addCar(@ModelAttribute Car car){
+	public String addCar(@Valid Car car, BindingResult result, Model model){
+		
+		model.addAttribute("manufacturers", manufacturers);
+		model.addAttribute("productionYears", productionYears);
 		
 		System.out.println(car);
 		
+		if(result.hasErrors()){
+			
+			List<ObjectError> allErrors = result.getAllErrors();
+			
+			for(ObjectError error: allErrors){
+				System.out.println(error.getDefaultMessage());
+			}
+			
+			return "addCar"; //////////////////////// nemoj zaboravit vratit ovo
+		}
+		else {
+		
+
 		carDAO.addCar(car);
 		return "addCar";
+		
+		}
 	}
 	
 	@RequestMapping(value = "/search", method=RequestMethod.GET)
