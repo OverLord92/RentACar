@@ -1,2 +1,2 @@
 # RentACar
-mini spring mvc projekat
+Mini Spring WebMvc Security projekat podesen sa web.xml fajlom

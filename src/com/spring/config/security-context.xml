@@ -13,14 +13,23 @@
 				<security:user name="samin" authorities="ADMIN"
 					password="faraon96" />
 			</security:user-service>
+			
+		</security:authentication-provider>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource" />
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
-	
+
+
 	<security:http use-expressions="true">
 		<security:intercept-url pattern="/home" access="permitAll" />
+		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		<security:intercept-url pattern="/goToRegisterForm" access="permitAll" />
+		<security:intercept-url pattern="/register" access="permitAll" />
+		<security:intercept-url pattern="/login" access="permitAll" />
 		<security:intercept-url pattern="/add" access="isAuthenticated()" />
 		<security:intercept-url pattern="/**" access="denyAll" />
-		<security:form-login />
+		<security:form-login login-page="/login"
+			authentication-failure-url="/login?error=true" />
 	</security:http>
 </beans>

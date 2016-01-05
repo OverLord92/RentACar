@@ -9,7 +9,7 @@ public class Car {
 	private int id;
 	
 	@NotNull(message="ne smije biti null")
-	@Size(min = 15, max = 30, message = "mora biti izmedju 15 i 30")
+	@Size(min = 2, max = 30, message = "mora biti izmedju 15 i 30")
 	private String manufacturer;
 	
 	@NotNull
@@ -17,7 +17,6 @@ public class Car {
 	private String model;
 	
 	@NotNull(message="ne smije biti produkcija")
-	@Min(value=100000, message="trololololo")
 	private int yearOfProduction;
 	
 	@NotNull(message="ne smije biti null")
